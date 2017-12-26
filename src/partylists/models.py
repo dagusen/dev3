@@ -25,6 +25,9 @@ class PartyList(models.Model):
 	def __str__(self):
 		return self.partylist_name
 
+	class Meta:
+		ordering = ['-updated', '-timestamp']
+
 	def get_absolute_url(self):
 		return reverse('party-list:edit', kwargs={'slug': self.slug})
 
