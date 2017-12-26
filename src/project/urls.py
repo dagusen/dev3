@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^party-list/', include('partylists.urls' , namespace='party-list'))
+    url(r'^party-list/', include('partylists.urls' , namespace='party-list')),
+    url(r'^position/', include('positions.urls' , namespace='position'))
 ]

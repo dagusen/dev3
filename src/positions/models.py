@@ -26,10 +26,14 @@ class Position(models.Model):
 	slug				= models.SlugField(null=True, blank=True)
 
 	def __str__(self):
-		return self.name
+		return self.position_name
 
 	def get_absolute_url(self):
 		return reverse('position:detail', kwargs={'slug': self.slug})
+
+	@property
+	def title(self):
+		return self.position_name
 
 	class Meta:
 		ordering = ['-updated', '-timestamp']

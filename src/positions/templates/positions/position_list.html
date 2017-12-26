@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block head_title %}Position List | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<ul>
+	{% for obj in object_list %}
+		<li><a href='{{ obj.get_absolute_url }}'>{{ obj }}</a><br/><small>{{ obj.timestamp }} {{ obj.updated }}</small></li>
+	{% endfor %}
+</ul>
+{% endblock %}
