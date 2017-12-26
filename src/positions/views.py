@@ -34,9 +34,12 @@ class PositionCreateView(CreateView):
 		obj.user = self.request.user
 		return super(PositionCreateView, self).form_valid(form)
 
+	def get_queryset(self):
+		return Position.objects.filter(user=self.request.user)
+
 	def get_context_data(self, *args, **kwargs):
-		context = super(RestaurantCreateView, self).get_context_data(*args, **kwargs)
-		context['title'] = 'Add Restaurant'
+		context = super(PositionCreateView, self).get_context_data(*args, **kwargs)
+		context['title'] = 'Add Position'
 		return context
 
 	#for user checking if login of not
