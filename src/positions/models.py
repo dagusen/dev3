@@ -29,7 +29,7 @@ class Position(models.Model):
 		return self.position_name
 
 	def get_absolute_url(self):
-		return reverse('position:detail', kwargs={'slug': self.slug})
+		return reverse('position:edit', kwargs={'slug': self.slug})
 
 	@property
 	def title(self):
