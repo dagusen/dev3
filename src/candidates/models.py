@@ -28,7 +28,7 @@ class CandidateManager(models.Manager):
 class Candidate(models.Model):
 	user 				= models.OneToOneField(User)
 	voters				= models.ManyToManyField(User, related_name='is_voted', blank=True)
-	positionNpartylist 	= models.OneToOneField(Position, blank=True, null=True)
+	positionNpartylist 	= models.OneToOneField(Position)
 	activation_key 		= models.CharField(max_length=120, blank=True, null=True)
 	activated			= models.BooleanField(default=False)
 	timestamp			= models.DateTimeField(auto_now_add=True)
@@ -38,8 +38,6 @@ class Candidate(models.Model):
 
 	def __str__(self):
 		return self.user.username
-
-		
 
 def post_save_user_receiver(sender, instance, created, *args, **kwargs):
 	if created:
