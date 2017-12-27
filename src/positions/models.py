@@ -26,7 +26,7 @@ class Position(models.Model):
 	slug				= models.SlugField(null=True, blank=True)
 
 	def __str__(self):
-		return self.position_name
+		return '%s - %s' % (self.position_name, self.partylist )
 
 	def get_absolute_url(self):
 		return reverse('position:edit', kwargs={'slug': self.slug})

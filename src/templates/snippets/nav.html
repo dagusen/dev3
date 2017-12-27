@@ -1,6 +1,6 @@
 <div class='container'>
 	<a href='{% url "home" %}'>Home</a>
-	{% if request.user.is_authenticated %}
+	{% if request.user.is_superuser %}
 	<a href='{% url "party-list:list" %}'>Party List</a>
 	<a href='{% url "position:list" %}'>Position List</a>
 	{% endif %}

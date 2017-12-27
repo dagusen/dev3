@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from django.views.generic import (
 	ListView,
@@ -18,15 +18,18 @@ from .forms import PartyListCreateForm
 
 # Create your views here.
 
-class PartyListListView(LoginRequiredMixin, ListView):
+class PartyListListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+	permission_required = 'partylists'
 	def get_queryset(self):
 		return PartyList.objects.filter(owner=self.request.user)
 
-class PartyListDetailView(LoginRequiredMixin, DetailView):
+class PartyListDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+	permission_required = 'partylists'
 	def get_queryset(self):
 		return PartyList.objects.filter(owner=self.request.user)
 
-class PartyListCreateView(LoginRequiredMixin, CreateView):
+class PartyListCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+	permission_required = 'partylists'
 	form_class = PartyListCreateForm
 	template_name = 'form.html'
 
@@ -41,7 +44,8 @@ class PartyListCreateView(LoginRequiredMixin, CreateView):
 		context['title'] = 'Add Party List'
 		return context
 
-class PartyListUpdateView(LoginRequiredMixin, UpdateView):
+class PartyListUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+	permission_required = 'partylists'
 	form_class = PartyListCreateForm
 	template_name = 'partylists/detail-update.html'
 

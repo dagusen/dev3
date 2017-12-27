@@ -21,7 +21,7 @@ from django.urls import reverse_lazy
 
 from django.views.generic import TemplateView
 
-from candidates.views import CandidateVoteToggle
+from candidates.views import CandidateVoteToggle, CandidateListView
 
 from django.contrib.auth.views import(
     LoginView,
@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^position/', include('positions.urls' , namespace='position')),
     url(r'^candidate/', include('candidates.urls' , namespace='candidate')),
     url(r'^vote/$', CandidateVoteToggle.as_view(), name='vote'),
-    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^$', CandidateListView.as_view(), name='home'),
 
     # login
     url(r'^login/$', LoginView.as_view(), name='login'),

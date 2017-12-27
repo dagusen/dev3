@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from django.views.generic import (
 	ListView, 
@@ -19,15 +19,18 @@ from .models import Position
 
 # Create your views here.
 
-class PositionListView(LoginRequiredMixin, ListView):
+class PositionListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+	permission_required = 'positions'
 	def get_queryset(self):
 		return Position.objects.filter(user=self.request.user)
 
 class PositionDetailView(LoginRequiredMixin, DetailView):
+	permission_required = 'positions'
 	def get_queryset(self):
 		return Position.objects.filter(user=self.request.user)
 
-class PositionCreateView(LoginRequiredMixin, CreateView):
+class PositionCreateView(LoginRequiredMixin, PermissionRequiredMixin,CreateView):
+	permission_required = 'positions'
 	form_class = PositionCreateForm
 	template_name = 'form.html'
 
@@ -52,7 +55,8 @@ class PositionCreateView(LoginRequiredMixin, CreateView):
 	#  	kwargs['user'] = self.request.user
 	#  	return kwargs
 
-class PositionUpdateView(LoginRequiredMixin, UpdateView):
+class PositionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+	permission_required = 'positions'
 	form_class = PositionCreateForm
 	template_name = 'positions/detail-update.html'
 	def get_queryset(self):

@@ -26,6 +26,7 @@ class CandidateManager(models.Manager):
 class Candidate(models.Model):
 	user 				= models.OneToOneField(User)
 	voters				= models.ManyToManyField(User, related_name='is_voted', blank=True)
+	
 	activation_key 		= models.CharField(max_length=120, blank=True, null=True)
 	activated			= models.BooleanField(default=False)
 	timestamp			= models.DateTimeField(auto_now_add=True)
