@@ -6,6 +6,10 @@
 {% block content %}
 <h1>{{ user.username }}</h1>
 <p>{{ user.first_name }} {{ user.last_name }}</p>
+
+<p>{{ partylist.position.position_name }}</p>
+
+
  <!-- follow -->
 <p>{% include 'candidates/snippet/vote_form.html' with username=user.username is_voted=is_voted %}</p>
 <p>votes : {{ user.candidate.voters.count }}</p>
