@@ -76,6 +76,7 @@ class CandidateDetailView(LoginRequiredMixin, DetailView):
 		return context
 
 class CandidateCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+	permission_required = 'candidates'
 	form_class = CandidateCreateForm
 	template_name = 'form.html'
 
