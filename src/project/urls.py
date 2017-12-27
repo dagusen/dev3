@@ -14,10 +14,49 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+
 from django.contrib import admin
+
+from django.urls import reverse_lazy
+
+from django.views.generic import TemplateView
+
+from candidates.views import CandidateVoteToggle
+
+from positions.views import HomeView
+
+from django.contrib.auth.views import(
+    LoginView,
+    LogoutView,
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordChangeView,
+    PasswordChangeDoneView,
+    PasswordResetConfirmView,
+    PasswordResetCompleteView,
+    )
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^party-list/', include('partylists.urls' , namespace='party-list')),
-    url(r'^position/', include('positions.urls' , namespace='position'))
+    url(r'^position/', include('positions.urls' , namespace='position')),
+    url(r'^candidate/', include('candidates.urls' , namespace='candidate')),
+    url(r'^vote/$', CandidateVoteToggle.as_view(), name='vote'),
+    url(r'^$', HomeView.as_view(), name='home'),
+
+    # login
+    url(r'^login/$', LoginView.as_view(), name='login'),
+    url(r'^login/$', LoginView.as_view(template_name='registration/login.html'), name='login'),
+    url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
+
+    # register
+    # url(r'^register/$', RegisterView.as_view(), name='register'),
+
+    url(r'^password_change/$', PasswordChangeView.as_view(template_name='registration/password_change_form.html'),name='password_change'),
+    url(r'^password_change/done/$', PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), name='password_change_done'),
+    url(r'^password_reset/$', PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),
+    url(r'^password_reset/done/$', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
+    url(r'^reset/done/$', PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+
 ]
