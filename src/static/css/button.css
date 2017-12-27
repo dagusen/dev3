@@ -1,0 +1,6 @@
+#show-button { cursor:pointer; }
+#hide-button { cursor: pointer;display: none; }
+
+#show-button, #hide-button { color: #fff; border-radius: 5px; padding: 10px 50px; }
+#show-button { background: #0703af; }
+#hide-button { background: #af2303; }
