@@ -19,7 +19,7 @@ User = settings.AUTH_USER_MODEL
 
 class Position(models.Model):
 	user 				= models.ForeignKey(User)
-	partylist			= models.ForeignKey(PartyList)
+	partylist			= models.ForeignKey(PartyList, on_delete=models.CASCADE, null=True, blank=True)
 	position_name 		= models.CharField(max_length=120)
 	timestamp			= models.DateTimeField(auto_now_add=True)
 	updated				= models.DateTimeField(auto_now=True)

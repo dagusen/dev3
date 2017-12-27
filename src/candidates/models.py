@@ -28,7 +28,7 @@ class CandidateManager(models.Manager):
 class Candidate(models.Model):
 	user 				= models.OneToOneField(User)
 	voters				= models.ManyToManyField(User, related_name='is_voted', blank=True)
-	positionNpartylist 	= models.OneToOneField(Position)
+	positionNpartylist 	= models.OneToOneField(Position, on_delete=models.CASCADE, null=True, blank=True)
 	activation_key 		= models.CharField(max_length=120, blank=True, null=True)
 	activated			= models.BooleanField(default=False)
 	timestamp			= models.DateTimeField(auto_now_add=True)
