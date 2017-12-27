@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-sm-6 text-center col-sm-offset-3">
-	<h3>Candidates</h3>
+	<h3>Candidates {% if request.user.is_superuser %}<a href='{% url "candidate:create" %}'>Add Candidate</a>{% endif %}</h3>
 	{% for obj in object_list %}
 		<div class="thumbnail">
 		<h3><a href='{% url "candidate:detail" username=obj.user.username %}'>{{ obj.user.username }}</a></h3>

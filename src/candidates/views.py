@@ -11,13 +11,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import render, get_object_or_404, redirect
 
-from django.views.generic import DetailView, View, ListView
+from django.views.generic import (
+	DetailView, 
+	View, 
+	ListView, 
+	CreateView
+	)
 
 from partylists.models import PartyList
 
 from positions.models import Position
 
 from .models import Candidate
+
+from .forms import CandidateCreateForm
 
 User = get_user_model()
 
@@ -59,4 +66,19 @@ class CandidateDetailView(LoginRequiredMixin, DetailView):
 		qs = PartyList.objects.filter(owner=user).search(query)
 		if Position_exists and qs.exists():
 			context['partylist'] = qs
+		return context
+
+class CandidateCreateView(LoginRequiredMixin, CreateView):
+	form_class = CandidateCreateForm
+	template_name = 'form.html'
+
+	def form_valid(self, form):
+		instance = form.save(commit=False)
+		instance.user = self.request.user
+		return super(CandidateCreateView, self).form_valid(form)
+
+	# context for html title
+	def get_context_data(self, *args, **kwargs):
+		context = super(CandidateCreateView, self).get_context_data(*args, **kwargs)
+		context['title'] = 'Add candidate'
 		return context

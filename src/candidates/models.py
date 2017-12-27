@@ -39,6 +39,10 @@ class Candidate(models.Model):
 	def __str__(self):
 		return self.user.username
 
+	@property
+	def title(self):
+		return self.user.username
+
 def post_save_user_receiver(sender, instance, created, *args, **kwargs):
 	if created:
 		candidate, is_created = Candidate.objects.get_or_create(user=instance)
