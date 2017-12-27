@@ -7,6 +7,8 @@ from django.db.models.signals import post_save
 
 from django.conf import settings
 
+from positions.models import Position
+
 User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -26,7 +28,7 @@ class CandidateManager(models.Manager):
 class Candidate(models.Model):
 	user 				= models.OneToOneField(User)
 	voters				= models.ManyToManyField(User, related_name='is_voted', blank=True)
-	
+	positionNpartylist 	= models.OneToOneField(Position, blank=True, null=True)
 	activation_key 		= models.CharField(max_length=120, blank=True, null=True)
 	activated			= models.BooleanField(default=False)
 	timestamp			= models.DateTimeField(auto_now_add=True)
@@ -36,6 +38,8 @@ class Candidate(models.Model):
 
 	def __str__(self):
 		return self.user.username
+
+		
 
 def post_save_user_receiver(sender, instance, created, *args, **kwargs):
 	if created:

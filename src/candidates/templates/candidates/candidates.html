@@ -10,6 +10,7 @@
 		<h3><a href='{% url "candidate:detail" username=obj.user.username %}'>{{ obj.user.username }}</a></h3>
 
 		<p>{{ obj.user.first_name }} {{ obj.user.last_name}}</p>
+		<p>{{ obj.positionNpartylist }}</p>
 		
 		{% empty %}
 			<li><a href='{% url "position:create" %}'>Add Menu Items</a></li>

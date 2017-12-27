@@ -5,10 +5,13 @@
 
 {% block content %}
 <h1>{{ user.username }}</h1>
+<p>{{ user.first_name }} {{ user.last_name }}</p>
  <!-- follow -->
 <p>{% include 'candidates/snippet/vote_form.html' with username=user.username is_voted=is_voted %}</p>
 <p>votes : {{ user.candidate.voters.count }}</p>
 
+
+{% if request.user.is_superuser %}
 <!-- search -->
 <form class='form' method='GET' action='.'>
 	<input type='text' placeholder='Search..' name='q' value='{{ request.GET.q }}'>
@@ -37,6 +40,7 @@
 
 {% else %}
 	<p class='lead'>No Items Found</p>
+{% endif %}
 {% endif %}
 
 {% endblock %}
