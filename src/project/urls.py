@@ -23,8 +23,6 @@ from django.views.generic import TemplateView
 
 from candidates.views import CandidateVoteToggle
 
-from positions.views import HomeView
-
 from django.contrib.auth.views import(
     LoginView,
     LogoutView,
@@ -42,7 +40,7 @@ urlpatterns = [
     url(r'^position/', include('positions.urls' , namespace='position')),
     url(r'^candidate/', include('candidates.urls' , namespace='candidate')),
     url(r'^vote/$', CandidateVoteToggle.as_view(), name='vote'),
-    url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
 
     # login
     url(r'^login/$', LoginView.as_view(), name='login'),

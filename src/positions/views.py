@@ -19,15 +19,6 @@ from .models import Position
 
 # Create your views here.
 
-class HomeView(View):
-	def get(self, request, *args, **kwargs):
-		if not request.user.is_authenticated():
-			return render(request, "home.html", {})
-		user = request.user
-		is_voted_user_ids = [x.user.id for x in user.is_voted.all()]
-		qs = Position.objects.filter(user__id__in=is_voted_user_ids).order_by("-updated")[:10]
-		return render(request, "positions/candidate-feed.html", {'qs':qs})
-
 class PositionListView(LoginRequiredMixin, ListView):
 	def get_queryset(self):
 		return Position.objects.filter(user=self.request.user)
@@ -56,10 +47,10 @@ class PositionCreateView(LoginRequiredMixin, CreateView):
 
 	#for user checking if login of not
 	#giving data
-	def get_form_kwargs(self):
-	 	kwargs = super(PositionCreateView, self).get_form_kwargs()
-	 	kwargs['user'] = self.request.user
-	 	return kwargs
+	# def get_form_kwargs(self):
+	#  	kwargs = super(PositionCreateView, self).get_form_kwargs()
+	#  	kwargs['user'] = self.request.user
+	#  	return kwargs
 
 class PositionUpdateView(LoginRequiredMixin, UpdateView):
 	form_class = PositionCreateForm

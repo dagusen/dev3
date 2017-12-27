@@ -29,6 +29,15 @@ class CandidateVoteToggle(View):
 		candidate_, is_voted = Candidate.objects.toggle_vote(request.user, username_to_toggle)
 		return redirect('/candidate/%s' % candidate_.user.username )
 
+class CandidateListView(ListView):
+	def get(self, request, *args, **kwargs):
+		if not request.user.is_authenticated():
+			return render(request, "home.html", {})
+		user = request.user
+		is_voted_user_ids = [x.user.id for x in user.is_voted.all()]
+		qs = Position.objects.filter(user__id__in=is_voted_user_ids).order_by("-updated")[:10]
+		return render(request, "candidates/candidates.html", {'object_list':qs})
+
 class CandidateDetailView(LoginRequiredMixin, DetailView):
 	template_name = 'candidates/user.html'
 

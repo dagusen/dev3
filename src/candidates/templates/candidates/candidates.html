@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-6 text-center col-sm-offset-3">
+	<h3>User Following Feed</h3>
+	{% for obj in object_list %}
+		<div class="thumbnail">
+		<h3><a href='{% url "candidate:detail" username=obj.user.username %}'>{{ obj.user.username }}</a></h3>
+
+		<p>{{ obj.partylist }}</p><br/>
+		<p>{{ obj.position_name }}</p><br/>
+		
+		{% empty %}
+			<li><a href='{% url "position:create" %}'>Add Menu Items</a></li>
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}
