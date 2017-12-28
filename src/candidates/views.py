@@ -41,7 +41,7 @@ class CandidateVoteToggle(View):
 	def post(self, request, *args, **kwargs):
 		username_to_toggle = request.POST.get("username")
 		candidate_, is_voted = Candidate.objects.toggle_vote(request.user, username_to_toggle)
-		return redirect('/candidate/%s' % candidate_.user.username )
+		return redirect('/candidate/%s' % candidate_.user.username)
 
 class CandidateListView(LoginRequiredMixin, ListView):
 	template_name = 'candidates/candidates.html'

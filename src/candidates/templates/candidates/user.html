@@ -8,43 +8,8 @@
 <p>{{ user.first_name }} {{ user.last_name }}</p>
 
 <p>{{ partylist.position.position_name }}</p>
-
-
- <!-- follow -->
+ <!-- vote -->
 <p>{% include 'candidates/snippet/vote_form.html' with username=user.username is_voted=is_voted %}</p>
 <p>votes : {{ user.candidate.voters.count }}</p>
-
-
-{% if request.user.is_superuser %}
-<!-- search -->
-<form class='form' method='GET' action='.'>
-	<input type='text' placeholder='Search..' name='q' value='{{ request.GET.q }}'>
-	<button class='btn btn-default' type='submit'>Search</button>
-</form>
-<hr/>
-{% if partylist %}
-{% for partyl in partylist %}
-	<div class="row">
-	<div class="col-sm-12">
-		<div class="thumbnail">
-		<p><a href='{{ request.path }}?q={{ partyl.title }}'>{{ partyl.title }}</a></p>
-		<br/>
-		<ul>
-			{% for pos in partyl.position_set.all %}
-				<li style="margin-bottom: 15px">
-					<a href='{{ request.path }}?q={{ pos.position_name }}'>{{ pos.position_name }}</a>
-				</li>
-			{% endfor %}
-		</ul>
-		</div>
-	</div>
-	</div>
-	
-{% endfor %}
-
-{% else %}
-	<p class='lead'>No Items Found</p>
-{% endif %}
-{% endif %}
-
+<p>Party List and Position : {{ user.candidate.positionNpartylist }}</p>
 {% endblock %}

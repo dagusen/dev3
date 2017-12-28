@@ -1,6 +1,6 @@
 {% if request.user.is_authenticated %}
 <form class='form' method='POST' action='{% url "vote" %}'>{% csrf_token %}
 	<input type='hidden' name='username' value='{% if username %}{{ username }}{% else %}louis{% endif %}'/>
-	<button class='btn {% if is_voted %}btn-default{% else %}btn-primary{% endif %}' id="{% if is_voted %}hide-button{% else %}show-button{% endif %}">{% if is_voted %}Unvote{% else %}vote{% endif %}</button>
+	<button class='btn {% if is_voted %}btn-default{% else %}btn-primary{% endif %}' id="{% if is_voted %}show-button{% else %}show-button{% endif %}">{% if is_voted %}Unvote{% else %}vote{% endif %}</button>
 </form>
 {% endif %}
