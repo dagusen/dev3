@@ -5,6 +5,8 @@ from django.contrib import admin
 
 from .models import Position
 
+from candidates.models import Candidate
+
 # Register your models here.
 
 admin.site.register(Position)

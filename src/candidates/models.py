@@ -37,11 +37,11 @@ class Candidate(models.Model):
 	objects 			= CandidateManager()
 
 	def __str__(self):
-		return self.user.username
+		return '%s %s' % (self.user.first_name, self.user.last_name)
 
 	@property
 	def title(self):
-		return self.user.username
+		return '%s %s' % (self.user.first_name, self.user.last_name)
 
 def post_save_user_receiver(sender, instance, created, *args, **kwargs):
 	if created:

@@ -7,7 +7,7 @@
 	<h3>Candidates <small>{% if request.user.is_superuser %}<a href='{% url "candidate:create" %}'>Add Candidate</a>{% endif %}</small></h3>
 	{% for obj in object_list %}
 		<div class="thumbnail">
-		<h3><a href='{% url "candidate:detail" username=obj.user.username %}'>{{ obj.user.username }}</a></h3>
+		<h3><a href='{% url "candidate:detail" username=obj.user.username %}'>{{ obj }}</a></h3>
 
 		<p>{{ obj.user.first_name }} {{ obj.user.last_name}}</p>
 		<p>{{ obj.positionNpartylist }}</p>

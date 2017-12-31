@@ -47,6 +47,9 @@ class CandidateListView(LoginRequiredMixin, ListView):
 	template_name = 'candidates/candidates.html'
 	def get_queryset(self):
 		return Candidate.objects.all()
+		
+
+
 
 class CandidateDetailView(LoginRequiredMixin, DetailView):
 	template_name = 'candidates/user.html'
