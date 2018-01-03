@@ -1,0 +1,32 @@
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	font-family: tahoma;
+}
+
+.row{
+	max-width: 1140px;
+	margin:0 auto;
+}
+
+.hero{
+	position: absolute;
+	width: : 1140px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+header{
+	background-image: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)), url(img/hero.jpg);
+	height: 100vh;
+	background-position: center;
+	background-size: cover; 
+}
+
+h1{
+	color: white;
+}
